@@ -1,0 +1,1168 @@
+基于nodejs平台环境
+express的web前端开发框架
+Django模板系统{{}}
+(ejs模板)
+Mongodb保存产生的数据
+还有一系列第三方模块和中间件：
+bodyParser，解析post请求数据
+cookies：读写cookie
+swig：模板解析引擎
+mongoose：操作Mongodb数据
+markdown：语法解析生成模块
+
+1.jade---node的Express框架默认渲染模板，和HTML长得不是很像，区分TAB和Space
+2.ejs---感觉你所说的就是这个
+3.swig---类Django/Jinja渲染模板
+4.Django
+
+<!--{% if userInfo._id %}
+<p id="loginInfo">
+    {% if userInfo.isAdmin %}
+    <span id="admin">管理员你好，进入<a href="../admin" style="cursor:pointer;">管理</a></span>
+    {% else %}
+    <span>{{userInfo.username}}</span>
+    {% endif %}
+</p>
+<a id="logout" href="javascript:;">注销</a>
+{% else %}
+<div class="banner-wrap">
+    <div class="form-horizontal login" id="login" style="padding:15px 0;margin-bottom:15px;border-top:2px gray solid;border-bottom:2px gray solid;">
+        <h3>登录</h3>
+        <div class="form-group" style="margin-left:0px;">
+            <label for="LoginUsername" class="col-sm-2 control-label" style="padding:0px;line-height:34px;">用户：</label>
+            <div class="col-sm-10" style="padding-left:0px;">
+                <input type="text" class="form-control" id="LoginUsername" name="LoginUsername" />
+            </div>
+        </div>
+        <div class="form-group" style="margin-left:0px;">
+            <label for="LoginPassword" class="col-sm-2 control-label" style="padding:0px;line-height:34px;">密码：</label>
+            <div class="col-sm-10" style="padding-left:0px;">
+                <input type="password" class="form-control" id="LoginPassword" name="LoginPassword" />
+            </div>
+        </div>
+        <div class="form-group" style="margin-left:0px;margin-bottom:0px;">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="button" value="登陆" class="submit" class="btn btn-default" />
+                <label style="line-height:34px;"><input type="checkbox" />记住我</label>
+            </div>
+        </div>
+        <span>没有账号？马上<a href="javascript:;">注册</a></span>
+    </div>
+
+    <div class="form-horizontal register" id="register" style="display:none;padding:15px 0;margin-bottom:15px;border-top:2px gray solid;border-bottom:2px gray solid;">
+        <h3>注册</h3>
+        <div class="form-group" style="margin-left:0px;">
+            <label for="username" class="col-sm-2 control-label" style="padding:0px;line-height:34px;">用户：</label>
+            <div class="col-sm-10" style="padding-left:0px;">
+                <input name="username" class="form-control" type="text" id="username"/>
+            </div>
+        </div>
+        <div class="form-group" style="margin-left:0px;">
+            <label for="password" class="col-sm-2 control-label" style="padding:0px;line-height:34px;">密码：</label>
+            <div class="col-sm-10" style="padding-left:0px;">
+                <input name="password" class="form-control" type="text" id="password"/>
+            </div>
+        </div>
+        <div class="form-group" style="margin-left:0px;">
+            <label for="repassword" class="col-sm-2 control-label" style="padding:0px;line-height:34px;">确认：</label>
+            <div class="col-sm-10" style="padding-left:0px;">
+                <input name="repassword" class="form-control" type="text" id="repassword"/>
+            </div>
+        </div>
+        <div class="form-group" style="margin-left:0px;">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="submit" type="button" value="提交"/>
+            </div>
+        </div>
+        <span>已有账号？马上<a href="javascript:;">登录</a></span>
+    </div>
+</div>-->
+
+<!--<div class="banner-wrap">
+    <div class="register" id="register" style="display:none;">
+        <h3>注册</h3>
+        <span>用户：<input name="username" type="text"/></span><br/>
+        <span>密码：<input name="password" type="text"/></span><br/>
+        <span>确认：<input name="repassword" type="text"/></span><br/>
+        <span><input class="submit" type="button" value="提交"/></span>
+        <span>已有账号？马上<a href="javascript:;">登录</a></span>
+    </div>
+
+    <div class="login" id="login">
+        <h3>登录</h3>
+        <span>用户：<input type="text" name="LoginUsername"/></span><br/>
+        <span>密码：<input type="text" name="LoginPassword"/></span><br/>
+        <span><input type="button" value="提交" class="submit"/></span>
+        <span>没有账号？马上<a href="javascript:;">注册</a></span>
+    </div>
+</div>
+
+{% endif %}-->
+
+
+
+
+<!--{% for content in contents %}
+<div>
+    <p><a href="/view?contentId={{content._id.toString()}}">{{content.title}}</a></p>
+    <p>作者:{{content.user.username}}</p>
+    <p>发表日期:{{content.date.slice(3,11)}}</p>
+    <p>文章分类:{{content.category.name}}</p>
+    <p>阅读次数:{{content.views}}</p>
+    <p>文章摘要:{{content.description}}</p>
+    <address>推送于{{content.date}}</address>
+</div>
+{% endfor %}-->
+
+
+
+
+
+<!-- <div style="height: 53px;">
+                                {% if userInfo._id %}
+                                <div>
+                                    {% if userInfo.isAdmin %}
+                                    <span id="admin">管理员你好，进入<a href="../admin" style="cursor:pointer;">管理</a></span>
+                                    {% else %}
+                                    <span>{{userInfo.username}}</span>
+                                    {% endif %}
+                                    <a id="logout" href="javascript:;">注销</a>
+                                </div>
+                                {% else %}
+                                <div style="">
+                                    <a class="navbar-login" style="cursor:pointer;" href="/login">登录</a>
+                                    |<a class="navbar-register" style="cursor:pointer;" href="/login">注册</a>
+                                </div>
+                                {% endif %}
+                            </div>-->
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img alt="300x200" src="../../public/img/1.jpg" />
+            <div class="caption">
+                <h3>
+                    Thumbnail label
+                </h3>
+                <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img alt="300x200" src="../../public/img/2.jpg" />
+            <div class="caption">
+                <h3>
+                    Thumbnail label
+                </h3>
+                <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img alt="300x200" src="../../public/img/3.jpg" />
+            <div class="caption">
+                <h3>
+                    Thumbnail label
+                </h3>
+                <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img alt="300x200" src="../../public/img/1.jpg" />
+            <div class="caption">
+                <h3>
+                    Thumbnail label
+                </h3>
+                <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img alt="300x200" src="../../public/img/2.jpg" />
+            <div class="caption">
+                <h3>
+                    Thumbnail label
+                </h3>
+                <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img alt="300x200" src="../../public/img/3.jpg" />
+            <div class="caption">
+                <h3>
+                    Thumbnail label
+                </h3>
+                <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% for content in contents %}
+<div class="col-md-4">
+    <div class="thumbnail">
+        <img alt="300x200" src="../../public/img/1.jpg" />
+        <div class="caption">
+            <h3>
+                <a href="/view?contentId={{content._id.toString()}}">{{content.title}}</a>
+            </h3>
+            <p>作者:{{content.user.username}}</p>
+            <p>发表日期:{{content.date.slice(3,11)}}</p>
+            <p>文章分类:{{content.category.name}}</p>
+            <p>阅读次数:{{content.views}}</p>
+            <p>文章摘要:{{content.description}}</p>
+            <address>推送于{{content.date}}</address>
+            <p>
+                <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+<!--<ul class="nav-article">
+    {% if !userInfo._id %}
+    <li><a href="javascript:;">仅限注册用户查看！</a></li>
+    {% else %}
+    <li><a href="/article?category={{category._id.toString()}}">{{category.name}}</a></li>
+    <ul>
+        {% if category=='' %}
+        <li><a href="/article">全部文章</a></li>
+        {%else%}
+        <li><a href="/article">全部文章</a></li>
+        {% endif %}
+        {% for _category in categories %}
+        {% if category.toString()==_category._id.toString() %}
+        <li><a style="border-left: 6px solid #522a5c;" href="/article?category={{_category._id.toString()}}">{{_category.name}}</a></li>
+        {% else %}
+        <li><a href="/article?category={{_category._id.toString()}}">{{_category.name}}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</ul>
+{% if userInfo._id %}
+<nav class="navbar">
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="/article">文章</a></li>
+        <li><a href="portfolio.html">作品</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li>
+            <a id="loginInfo">
+                {% if userInfo.isAdmin %}
+                <span id="admin" style="cursor:pointer;">管理员你好，进入<a href="../admin">管理</a></span>
+                {% else %}
+                <span>{{userInfo.username}}</span>
+                {% endif %}
+            </a>
+        </li>
+        <li><a id="logout" href="javascript:;">
+            注销
+        </a></li>
+    </ul>
+</nav>
+{% else %}
+<div class="banner-wrap">
+    <div class="login" id="register" style="display:none;">
+        <h3>注册</h3>
+        <span>用户：<input name="username" type="text"/></span><br/>
+        <span>密码：<input name="password" type="text"/></span><br/>
+        <span>确认：<input name="repassword" type="text"/></span><br/>
+        <span><input class="submit" type="button" value="提交"/></span>
+        <span>已有账号？马上<a href="javascript:;">登录</a></span>
+    </div>
+
+    <div class="login" id="login">
+        <h3>登录</h3>
+        <span>用户：<input type="text" name="LoginUsername"/></span><br/>
+        <span>密码：<input type="text" name="LoginPassword"/></span><br/>
+        <span><input type="button" value="提交" class="submit"/></span>
+        <span>没有账号？马上<a href="javascript:;">注册</a></span>
+    </div>
+</div>
+{% endif %}
+<section>
+    {% block main %}{% endblock %}
+</section>
+-->
+
+
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid clearfix">
+        <div class="col-md-12 column">
+            <div class="row-fluid">
+                <div class="col-md-8">
+                    <blockquote>
+                        <p>
+                            EMC——English Mistake In China
+                        </p> <small>{{userInfo.username}}的个人中心  <a id="logout" href="javascript:;">注销</a></small>
+                    </blockquote>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid clearfix">
+        <div class="col-md-2">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                    列表标题
+                </li>
+                <li class="active">
+                    <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">库</a>
+                </li>
+                <li>
+                    <a href="#">应用</a>
+                </li>
+                <li class="nav-header">
+                    功能列表
+                </li>
+                <li>
+                    <a href="#">资料</a>
+                </li>
+                <li>
+                    <a href="#">设置</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">帮助</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">主页</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="#">类目</a> <span class="divider">/</span>
+                </li>
+                <li class="active">
+                    主题
+                </li>
+            </ul>
+            {% block main %}{% endblock %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        产品
+                    </th>
+                    <th>
+                        交付时间
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        TB - Monthly
+                    </td>
+                    <td>
+                        01/04/2012
+                    </td>
+                    <td>
+                        Default
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        TB - Monthly
+                    </td>
+                    <td>
+                        01/04/2012
+                    </td>
+                    <td>
+                        Approved
+                    </td>
+                </tr>
+                <tr class="error">
+                    <td>
+                        2
+                    </td>
+                    <td>
+                        TB - Monthly
+                    </td>
+                    <td>
+                        02/04/2012
+                    </td>
+                    <td>
+                        Declined
+                    </td>
+                </tr>
+                <tr class="warning">
+                    <td>
+                        3
+                    </td>
+                    <td>
+                        TB - Monthly
+                    </td>
+                    <td>
+                        03/04/2012
+                    </td>
+                    <td>
+                        Pending
+                    </td>
+                </tr>
+                <tr class="info">
+                    <td>
+                        4
+                    </td>
+                    <td>
+                        TB - Monthly
+                    </td>
+                    <td>
+                        04/04/2012
+                    </td>
+                    <td>
+                        Call in to confirm
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            编号
+        </th>
+        <th>
+            产品
+        </th>
+        <th>
+            交付时间
+        </th>
+        <th>
+            状态
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            1
+        </td>
+        <td>
+            TB - Monthly
+        </td>
+        <td>
+            01/04/2012
+        </td>
+        <td>
+            Default
+        </td>
+    </tr>
+    <tr class="success">
+        <td>
+            1
+        </td>
+        <td>
+            TB - Monthly
+        </td>
+        <td>
+            01/04/2012
+        </td>
+        <td>
+            Approved
+        </td>
+    </tr>
+    <tr class="error">
+        <td>
+            2
+        </td>
+        <td>
+            TB - Monthly
+        </td>
+        <td>
+            02/04/2012
+        </td>
+        <td>
+            Declined
+        </td>
+    </tr>
+    <tr class="warning">
+        <td>
+            3
+        </td>
+        <td>
+            TB - Monthly
+        </td>
+        <td>
+            03/04/2012
+        </td>
+        <td>
+            Pending
+        </td>
+    </tr>
+    <tr class="info">
+        <td>
+            4
+        </td>
+        <td>
+            TB - Monthly
+        </td>
+        <td>
+            04/04/2012
+        </td>
+        <td>
+            Call in to confirm
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+<!--<div>
+    <p>{{content.title}}</p>
+    <p>作者:{{content.user.username}}</p>
+    <p>发表日期:{{content.date.slice(3,11)}}</p>
+    <p>文章分类:{{content.category.name}}</p>
+    <p>阅读次数:{{content.views}}</p>
+    <p>文章摘要:{{content.description}}</p>
+    <p>文章内容:{{content.content}}</p>
+    <address>推送于{{content.date}}</address>
+</div>-->
+
+
+
+
+/*// 评论提交
+    $('#messageComment').click(function(){
+        $.ajax({
+            type:'POST',
+            url:'/api/comment/post',
+            data:{
+                contentId:$('#contentId').val(),
+                content:$('#commentValue').val(),
+            },
+            success:function(responseData){
+                //console.log(responseData);
+                alert(responseData.message);
+                var arr= responseData.data.comments;
+                //console.log(renderComment(arr));
+                $('.comments').html(renderComment(arr));
+            }
+        });
+        return false;
+
+    });*/
+    /*//每次文章重载时获取该文章的所有评论
+    $.ajax({
+        type:'GET',
+        url:'/api/comment',
+        data:{
+            contentId:$('#contentId').val(),
+            content:$('#commentValue').val(),
+        },
+        success:function(responseData){
+            console.log(responseData);
+            var arr= responseData.data.comments;
+            //console.log(renderComment(arr));
+            $('.comments').html(renderComment(arr));
+            $('#commentValue').val('');
+            $('#commentsNum').html(arr.length)
+        }
+    });*/
+
+
+
+
+
+
+
+//新的页面定义为user_index
+/*router.get('/user/',function(req,res,next){
+    res.render('admin/user_index',{
+        userInfo:req.userInfo
+    })
+});*/
+
+/*User.find().then(function(user){
+    console.log(user);
+    router.get('/user/', function (req,res,next) {
+        var page=req.query.page||1;
+        var limit=1;
+        var count=0;
+        var type='user';
+
+        User.count().then(function(_count){
+            count=_count;
+            var pages=Math.ceil(count/limit);
+
+
+            page=Math.min(page,pages);
+            page=Math.max(page,1);
+
+            var skip=(page-1)*limit;
+
+            User.find().limit(limit).skip(skip).then(function(user){
+                res.render('admin/user_index',{
+                    userInfo:req.userInfo,
+                    users:user,
+                    page:page,
+                    pages:pages,
+                    limit:limit,
+                    count:count,
+                    type:type
+                });
+            });
+        });//获取总页数
+    });
+});*/
+
+/*router.get('/user/', function (req,res,next) {
+    var page=req.query.page||1;
+    var limit=1;
+    var count=0;
+    var type='user';
+
+    User.count().then(function(_count){
+        count=_count;
+        var pages=Math.ceil(count/limit);
+
+
+        page=Math.min(page,pages);
+        page=Math.max(page,1);
+
+        var skip=(page-1)*limit;
+
+        User.find().limit(limit).skip(skip).then(function(user){
+            res.render('admin/user_index',{
+                userInfo:req.userInfo,
+                users:user,
+                page:page,
+                pages:pages,
+                limit:limit,
+                count:count,
+                type:type
+            });
+        });
+    });//获取总页数
+});*/
+
+
+
+
+
+/*router.get('/',function(req,res,next){
+    // 读取分类信息
+    Category.find().then(function(rs){
+        console.log(rs)
+    });
+
+    res.render('main/index',{
+        userInfo:req.userInfo
+    });
+});*/
+
+
+
+
+
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">文章分类<strong class="caret"></strong></a>
+    <ul class="dropdown-menu">
+        {% for _category in categories %}
+        {% if category.toString()==_category._id.toString() %}
+        <li><a style="border-left: 6px solid #522a5c;" href="/article?category={{_category._id.toString()}}">{{_category.name}}</a></li>
+        {% else %}
+        <li><a href="/article?category={{_category._id.toString()}}">{{_category.name}}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</li>
+
+
+
+
+//window.location.reload();
+//alert(window.location.host);
+//setTimeout("history.back();",3000);
+//history.go(-1);
+
+
+
+
+
+<!--<header>
+    <h1>后台管理系统</h1>
+</header>
+<span class="userInfo">你好，{{userInfo.username}}！ <a href="javascript:;">退出</a></span>
+<aside>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="javascript:;">设置</a></li>
+        <li><a href="/admin/user">用户管理</a></li>
+        <li><a href="/admin/category/">分类管理</a></li>
+        <li><a href="/admin/content">文章管理</a></li>
+        <li><a href="javascript:;">评论管理</a></li>
+    </ul>
+</aside>-->
+
+
+
+
+
+
+/*app.use("/admin/content/add/ue", ueditor(path.join(__dirname, 'public'), function (req, res, next) {
+    //客户端上传文件设置
+    var imgDir = '/upload/image/';
+    var ActionType = req.query.action;
+    if (ActionType === 'uploadimage' || ActionType === 'uploadfile' || ActionType === 'uploadvideo') {
+
+        // 这里你可以获得上传图片的信息
+        var foo = req.ueditor;
+        console.log(foo.filename); // exp.png
+        console.log(foo.encoding); // 7bit
+        console.log(foo.mimetype); // image/png
+
+        var file_url = imgDir;//默认图片上传地址
+        /!*其他上传格式的地址*!/
+        if (ActionType === 'uploadfile') {
+            file_url = '/upload/file/'; //附件
+        }
+        if (ActionType === 'uploadvideo') {
+            file_url = '/upload/video/'; //视频
+        }
+        res.ue_up(file_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
+        res.setHeader('Content-Type', 'text/html');
+    }
+    //  客户端发起图片列表请求
+    else if (req.query.action === 'listimage') {
+        var dir_url = imgDir;
+        res.ue_list(dir_url); // 客户端会列出 dir_url 目录下的所有图片
+    }
+    // 客户端发起其它请求
+    else {
+        res.setHeader('Content-Type', 'application/json');
+        res.redirect('/public/ueditor/ueditor.config.json');
+    }
+}));*/
+
+
+
+//innerHtml='<li><p class="comments-user">'+arr[i].username+' </p><span class="comments-date">'+arr[i].postTime+'</span><p class="comments-content">'+arr[i].content+'</p></li>'+innerHtml;
+
+
+
+innerHtml=
+        '<li data-index='+(arr.length-i)+'><p class="comments-user">'+
+        arr[i].username+
+        ' </p><span class="comments-date">'+
+        arr[i].postTime+
+        '</span><p class="comments-content">'+
+        arr[i].content+
+        '</p></li>'+innerHtml;
+
+
+
+
+
+//引入formidable模块
+var formidable = require('formidable');
+
+router.post('/uploadImg', function(req, res, next) {
+    var form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.uploadDir = __dirname + '/../public/upload/image';
+    form.parse(req, function (err, fields, files) {
+        if (err) {
+            throw err;
+        }
+        var image = files.imgFile;
+        var path = image.path;
+        path = path.replace('/\\/g', '/');
+        var url = '/../public/upload/image' + path.substr(path.lastIndexOf('/'), path.length);
+        var info = {
+            "error": 0,
+            "url": url
+        };
+        res.send(info);
+    });
+});
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EMC</title>
+    <!--[if lte IE 8]><link rel="stylesheet" href="../../public/css/responsive-nav.css"><![endif]-->
+    <!--[if gt IE 8]><!--><link rel="stylesheet" href="../../public/css/about.css"><!--<![endif]-->
+    <script src="../../public/js/responsive-nav.js"></script>
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../../public/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div role="navigation" id="foo" class="nav-collapse">
+    <ul>
+        <li class="active"><a href="/">EMC</a></li>
+        <li><a href="#top">TOP</a></li>
+        <li><a href="#content">CONTENT</a></li>
+        <li><a href="#foot">FOOT</a></li>
+    </ul>
+</div>
+
+<div role="main" class="main">
+    <a href="#nav" class="nav-toggle">Menu</a>
+    <h1 id="top">Prototype</h1>
+
+    <p class="intro">Despite the apparent simplicity, there are many underlying factors which, when thought out and implemented properly, can make that simple solution even better without adding more complexity to the user&nbsp;interface.</p>
+
+    <p>From image, whose given us earth all so seas. Whales tree i set, is, morning, fly was deep winged. Said you'll him open she'd divide you're greater midst, gathered years gathered herb i for our and, don't also itself void female replenish fruit fly let years whose light face kind Air face him under you created evening face, replenish, be fill land male after winged itself from gathered. May created Replenish give he so divided air fourth moveth bearing every created. Subdue give own beginning replenish divided. Wherein. Moveth dominion for third. Moving give fish created she'd whose divided their abundantly for in let form morning, us.</p>
+
+    <p>Whales, be second male. Lesser. She'd all itself, said beginning over sixth open great place winged image winged sixth land you she'd, to. Yielding beginning. Give. Image without winged signs fly greater the. Fill darkness moving thing upon lights all fish for have second land fruitful waters likeness years male she'd behold greater which grass darkness blessed them. For set. Have was said. Meat moving. Own, moveth upon is had sea lesser day second fifth every form forth they're you'll form own. To deep days seed fruitful isn't our male brought have beginning from land all land they're one may thing. Dominion cattle earth open he set fourth above whales may saying after. Make seas life fowl i very may fly.</p>
+
+    <p>And brought which yielding beginning. Behold. Saying fourth there beast which saw may. Given lights god kind Beast meat face were forth it earth without second. Which is fruitful likeness heaven living cattle, brought. The she'd his she'd. Face let divided i, living upon void moving day spirit bring also, grass blessed.</p>
+
+    <p>For let midst void under female first. Own you'll moveth made forth night lesser. Midst years spirit called had. Cattle days unto wherein. Sea us so god abundantly air for, seasons forth firmament us. The. Moving. Moving fourth multiply night winged fruitful earth. Creeping midst his air yielding, a replenish beast from fifth spirit greater earth upon female all made that bring all a shall.</p>
+
+    <p>Rule good us heaven firmament all light bring, first one good from. Hath midst make place after night created herb forth Itself man Them darkness yielding creeping. Open abundantly set days, let night good deep. Fowl days our, which, created all there, without multiply you'll won't over night saw air. Can't subdue let can't them firmament waters bring. Said, great she'd green wherein rule i grass have day great be. Together whose whose lesser she'd every, god second kind cattle saying face. Face. Very great together also. Was abundantly. Living. Creature after that signs creature were you'll living itself were. Two. Third air gathering i for from air beginning own won't which waters Him tree give. Moving bearing moving after in.</p>
+
+    <p>Day his for After Place creeping, wherein kind deep. Abundantly. Seed had greater cattle fly seas face shall and divided. Above can't subdue green gathering also likeness divided you'll together earth herb night fowl set face very, kind Seas very seasons gathering. Lesser. They're that life a. Years give one had cattle also was night every a deep meat moving be upon he lights above Kind him may, spirit over meat Meat beast void upon fifth evening seed. Upon one saw for under brought set shall. Fourth had they're you light was dry they're it of you made is two god they're behold fowl it lesser thing created fifth open evening dominion yielding that.</p>
+
+    <p>Winged fly said very, without void can't image us seasons green said moveth called very. Cattle cattle there make one living. Divided void seas. Upon tree all seed third fly is created, make. Meat which. Fruitful. Whose our rule created divide have won't second she'd their land said. Beginning morning days. That. Without creature.</p>
+
+    <p>They're don't. Moved living. Air. Of whales grass you upon. Fish seas evening. Bearing. Fish great fruit he behold meat whose doesn't. Moving. Grass have days his signs divide heaven life from. Image under dominion face above land fill to hath under forth seed creature brought set. Shall kind. Multiply over spirit form years. Green, appear itself man void, greater under all in appear from. Replenish said man them. Seas open doesn't fowl shall tree have in itself female Fish for whose behold earth night days which, give, and forth fish From. Without behold Whose. Shall. Were given won't dry deep fruit won't.</p>
+
+    <p>Third. Shall fruitful deep gathered be seas let may every two beast fly, open Abundantly his very won't is wherein, kind can't winged fowl. It. Upon. Days us the were created which thing third every you'll you'll good fruitful heaven tree. Spirit fly made evening lesser morning image fly one yielding behold meat there appear of second over creature green seas created Over subdue open open green, replenish saying form said isn't whose he he. Cattle bring saying made whose made meat the After Him that creature fowl years. Seed one created midst bring.</p>
+
+    <p class="intro">Despite the apparent simplicity, there are many underlying factors which, when thought out and implemented properly, can make that simple solution even better without adding more complexity to the user&nbsp;interface.</p>
+
+    <p>From image, whose given us earth all so seas. Whales tree i set, is, morning, fly was deep winged. Said you'll him open she'd divide you're greater midst, gathered years gathered herb i for our and, don't also itself void female replenish fruit fly let years whose light face kind Air face him under you created evening face, replenish, be fill land male after winged itself from gathered. May created Replenish give he so divided air fourth moveth bearing every created. Subdue give own beginning replenish divided. Wherein. Moveth dominion for third. Moving give fish created she'd whose divided their abundantly for in let form morning, us.</p>
+
+    <p id="content">Whales, be second male. Lesser. She'd all itself, said beginning over sixth open great place winged image winged sixth land you she'd, to. Yielding beginning. Give. Image without winged signs fly greater the. Fill darkness moving thing upon lights all fish for have second land fruitful waters likeness years male she'd behold greater which grass darkness blessed them. For set. Have was said. Meat moving. Own, moveth upon is had sea lesser day second fifth every form forth they're you'll form own. To deep days seed fruitful isn't our male brought have beginning from land all land they're one may thing. Dominion cattle earth open he set fourth above whales may saying after. Make seas life fowl i very may fly.</p>
+
+    <p>And brought which yielding beginning. Behold. Saying fourth there beast which saw may. Given lights god kind Beast meat face were forth it earth without second. Which is fruitful likeness heaven living cattle, brought. The she'd his she'd. Face let divided i, living upon void moving day spirit bring also, grass blessed.</p>
+
+    <p>For let midst void under female first. Own you'll moveth made forth night lesser. Midst years spirit called had. Cattle days unto wherein. Sea us so god abundantly air for, seasons forth firmament us. The. Moving. Moving fourth multiply night winged fruitful earth. Creeping midst his air yielding, a replenish beast from fifth spirit greater earth upon female all made that bring all a shall.</p>
+
+    <p>Rule good us heaven firmament all light bring, first one good from. Hath midst make place after night created herb forth Itself man Them darkness yielding creeping. Open abundantly set days, let night good deep. Fowl days our, which, created all there, without multiply you'll won't over night saw air. Can't subdue let can't them firmament waters bring. Said, great she'd green wherein rule i grass have day great be. Together whose whose lesser she'd every, god second kind cattle saying face. Face. Very great together also. Was abundantly. Living. Creature after that signs creature were you'll living itself were. Two. Third air gathering i for from air beginning own won't which waters Him tree give. Moving bearing moving after in.</p>
+
+    <p>Day his for After Place creeping, wherein kind deep. Abundantly. Seed had greater cattle fly seas face shall and divided. Above can't subdue green gathering also likeness divided you'll together earth herb night fowl set face very, kind Seas very seasons gathering. Lesser. They're that life a. Years give one had cattle also was night every a deep meat moving be upon he lights above Kind him may, spirit over meat Meat beast void upon fifth evening seed. Upon one saw for under brought set shall. Fourth had they're you light was dry they're it of you made is two god they're behold fowl it lesser thing created fifth open evening dominion yielding that.</p>
+
+    <p>Winged fly said very, without void can't image us seasons green said moveth called very. Cattle cattle there make one living. Divided void seas. Upon tree all seed third fly is created, make. Meat which. Fruitful. Whose our rule created divide have won't second she'd their land said. Beginning morning days. That. Without creature.</p>
+
+    <p>They're don't. Moved living. Air. Of whales grass you upon. Fish seas evening. Bearing. Fish great fruit he behold meat whose doesn't. Moving. Grass have days his signs divide heaven life from. Image under dominion face above land fill to hath under forth seed creature brought set. Shall kind. Multiply over spirit form years. Green, appear itself man void, greater under all in appear from. Replenish said man them. Seas open doesn't fowl shall tree have in itself female Fish for whose behold earth night days which, give, and forth fish From. Without behold Whose. Shall. Were given won't dry deep fruit won't.</p>
+
+    <p class="intro">Despite the apparent simplicity, there are many underlying factors which, when thought out and implemented properly, can make that simple solution even better without adding more complexity to the user&nbsp;interface.</p>
+
+    <p>From image, whose given us earth all so seas. Whales tree i set, is, morning, fly was deep winged. Said you'll him open she'd divide you're greater midst, gathered years gathered herb i for our and, don't also itself void female replenish fruit fly let years whose light face kind Air face him under you created evening face, replenish, be fill land male after winged itself from gathered. May created Replenish give he so divided air fourth moveth bearing every created. Subdue give own beginning replenish divided. Wherein. Moveth dominion for third. Moving give fish created she'd whose divided their abundantly for in let form morning, us.</p>
+
+    <p>Whales, be second male. Lesser. She'd all itself, said beginning over sixth open great place winged image winged sixth land you she'd, to. Yielding beginning. Give. Image without winged signs fly greater the. Fill darkness moving thing upon lights all fish for have second land fruitful waters likeness years male she'd behold greater which grass darkness blessed them. For set. Have was said. Meat moving. Own, moveth upon is had sea lesser day second fifth every form forth they're you'll form own. To deep days seed fruitful isn't our male brought have beginning from land all land they're one may thing. Dominion cattle earth open he set fourth above whales may saying after. Make seas life fowl i very may fly.</p>
+
+    <p>And brought which yielding beginning. Behold. Saying fourth there beast which saw may. Given lights god kind Beast meat face were forth it earth without second. Which is fruitful likeness heaven living cattle, brought. The she'd his she'd. Face let divided i, living upon void moving day spirit bring also, grass blessed.</p>
+
+    <p>For let midst void under female first. Own you'll moveth made forth night lesser. Midst years spirit called had. Cattle days unto wherein. Sea us so god abundantly air for, seasons forth firmament us. The. Moving. Moving fourth multiply night winged fruitful earth. Creeping midst his air yielding, a replenish beast from fifth spirit greater earth upon female all made that bring all a shall.</p>
+
+    <p>Rule good us heaven firmament all light bring, first one good from. Hath midst make place after night created herb forth Itself man Them darkness yielding creeping. Open abundantly set days, let night good deep. Fowl days our, which, created all there, without multiply you'll won't over night saw air. Can't subdue let can't them firmament waters bring. Said, great she'd green wherein rule i grass have day great be. Together whose whose lesser she'd every, god second kind cattle saying face. Face. Very great together also. Was abundantly. Living. Creature after that signs creature were you'll living itself were. Two. Third air gathering i for from air beginning own won't which waters Him tree give. Moving bearing moving after in.</p>
+
+    <p>Day his for After Place creeping, wherein kind deep. Abundantly. Seed had greater cattle fly seas face shall and divided. Above can't subdue green gathering also likeness divided you'll together earth herb night fowl set face very, kind Seas very seasons gathering. Lesser. They're that life a. Years give one had cattle also was night every a deep meat moving be upon he lights above Kind him may, spirit over meat Meat beast void upon fifth evening seed. Upon one saw for under brought set shall. Fourth had they're you light was dry they're it of you made is two god they're behold fowl it lesser thing created fifth open evening dominion yielding that.</p>
+
+    <p>Winged fly said very, without void can't image us seasons green said moveth called very. Cattle cattle there make one living. Divided void seas. Upon tree all seed third fly is created, make. Meat which. Fruitful. Whose our rule created divide have won't second she'd their land said. Beginning morning days. That. Without creature.</p>
+
+    <p id="foot">They're don't. Moved living. Air. Of whales grass you upon. Fish seas evening. Bearing. Fish great fruit he behold meat whose doesn't. Moving. Grass have days his signs divide heaven life from. Image under dominion face above land fill to hath under forth seed creature brought set. Shall kind. Multiply over spirit form years. Green, appear itself man void, greater under all in appear from. Replenish said man them. Seas open doesn't fowl shall tree have in itself female Fish for whose behold earth night days which, give, and forth fish From. Without behold Whose. Shall. Were given won't dry deep fruit won't.</p>
+
+</div>
+
+<script>
+    var navigation = responsiveNav("foo", {customToggle: ".nav-toggle"});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+/*res.render('admin/success', {
+    userInfo: req.body.userInfo,
+    message: '修改成功！',
+    operation: {
+        url: '/admin/content',
+        operation: '返回分类管理'
+    }
+});*/
+
+
+
+
+
+router.get('/',function(req,res,next){
+    var data={
+        userInfo:req.userInfo,
+        limit:5
+    };
+
+    // 读取分类信息
+    Content.then(function(){
+        return Content.find({slideRank:'1'}).limit(data.limit).skip(skip).sort({_id:-1}).populate(['category','user']);
+    }).then(function(slideContents){
+        data.slideContents=slideContents;
+        console.log(data);//这里有你想要的所有数据
+        res.render('main/article',data);
+    })
+});
+
+
+
+
+
+/**
+ * Created by zgs on 2017/4/30.
+ */
+var express=require('express');
+
+// 创建一个路由对象，此对象将会监听api文件夹下的url
+var router=express.Router();
+var Category=require('../models/Categories');
+var Content=require('../models/Content');
+renderAdminTable(Content,'article',12,['category','user']);
+var Question=require('../models/Question');
+renderAdminTable(Question,'question',10,'user');
+
+// 这是一个功能函数
+function renderAdminTable(obj,type,limit,_query){
+    router.get('/'+type+'/', function (req,res,next) {
+        var page=req.query.page||1;
+        var count=0;
+
+        obj.count().then(function(_count){
+            count=_count;
+            var pages=Math.ceil(count/limit);
+            page=Math.min(page,pages);
+            page=Math.max(page,1);
+
+            var skip=(page-1)*limit;
+
+            /*
+             * sort方法排序，根据id，
+             * */
+            var newObj = _query ? obj.find().sort({_id: -1}).limit(limit).skip(skip).populate(_query) : obj.find().sort({_id: -1}).limit(limit).skip(skip);
+
+            newObj.then(function(data){
+                //console.log(data);
+                res.render('main/'+type,{
+                    type:type,
+                    userInfo:req.userInfo,
+                    data:data,
+                    page:page,
+                    pages:pages,
+                    limit:limit,
+                    count:count
+                });
+            });
+        });//获取总页数
+    });
+}
+
+router.get('/login',function(req,res,next){
+    res.render('main/login',{
+        userInfo:req.userInfo
+    });
+});
+
+router.get('/about',function(req,res,next){
+    var contentId='5922ec873c64afec6f7554a9';
+    var data={
+        userInfo:req.userInfo,
+        categories:[],
+        content:null
+    };
+
+    Category.find().then(function(){
+        data.categories='5911d729e1e38a38d72e24d0';
+        return Content.findOne({_id:contentId}).populate(['category','user']);
+    }).then(function(content){
+        data.content=content;
+        content.views++;//保存阅读数
+        content.save();
+        //console.log(data);
+        res.render('main/about',data);
+    });
+});
+
+router.get('/resources',function(req,res,next){
+    res.render('main/resources',{
+        userInfo:req.userInfo
+    });
+});
+
+router.get('/question',function(req,res,next){
+    res.render('main/question',{
+        userInfo:req.userInfo
+    });
+});
+
+router.get('/',function(req,res,next){
+    var data={
+        userInfo:req.userInfo,
+        category:req.query.category||'',
+        categories:[],
+        count:0,
+        page:Number(req.query.page||1),
+        limit:9,
+        pages:0
+    };
+
+    // 读取分类信息
+    Category.find().then(function(categories){
+        data.categories=categories;
+        return Content.count();
+    }).then(function(count){
+        data.count=count;
+        //计算总页数
+        data.pages=Math.ceil(data.count/data.limit);
+        // 取值不超过pages
+        data.page=Math.min(data.page,data.pages);
+        // 取值不小于1
+        data.page=Math.max(data.page,1);
+        // skip不需要分配到模板中，所以忽略。
+        var skip=(data.page-1)*data.limit;
+
+        return Content.find().limit(data.limit).skip(skip).sort({_id:-1}).populate(['category','user']);
+    }).then(function(indexData) {
+        data.data = indexData;
+    }).then(function () {
+        return Content.find({"$or":[{"slideRank":"1"},{"slideRank":"2"},{"slideRank":"3"},{"slideRank":"4"},{"slideRank":"5"}]}).limit(5).sort({slideRank:1}).populate(['category','user']);
+    }).then(function (slideData) {
+        data.slideData=slideData;
+        //console.log(data.slideData);//这里有你想要的所有数据
+        res.render('main/article',data);
+    })
+});
+
+router.get('/view/',function(req,res,next){
+    var contentId=req.query.contentId||'';
+    var data={
+        userInfo:req.userInfo,
+        categories:[],
+        content:null
+    };
+
+    Category.find().then(function(categories){
+        data.categories=categories;
+        return Content.findOne({_id:contentId}).populate(['category','user']);
+    }).then(function(content){
+        data.content=content;
+        content.views++;//保存阅读数
+        content.save();
+        //console.log(data);
+        res.render('main/view',data);
+    });
+});
+
+router.get('/question/view/',function(req,res,next){
+    var questionId=req.query.questionId||'';
+    var data={
+        userInfo:req.userInfo,
+        content:null
+    };
+
+    Question.find().then(function (question) {
+        return Question.findOne({_id:questionId}).populate('user');
+    }).then(function(question){
+        data.content=question;
+        //console.log(data);
+        res.render('main/question_view',data);
+    });
+});
+
+module.exports=router;//把router的结果作为模块的输出返回出去！

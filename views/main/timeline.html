@@ -1,0 +1,46 @@
+<section id="cd-timeline" class="cd-container">
+    <div style="border-bottom: 2px #00c7ff solid;text-align: center;margin: 0 10px 10px 40px;padding: 5px;color: #ffa82c;">
+        <h4>热门文章</h4>
+    </div>
+    <div class="cd-timeline-article"></div>
+    <div style="border-bottom: 2px #00c7ff solid;text-align: center;margin: 10px 10px 10px 40px;padding: 5px;color: #ffa82c;">
+        <h4>热门问答</h4>
+    </div>
+    <div class="cd-timeline-question"></div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/timeline/article',
+            data: '',
+            success: function (responseData) {
+                var innerHtml='';
+                for(var i=0;i<responseData.data.length;i++){
+                    innerHtml='<div class="cd-timeline-block"><div class="cd-timeline-img cd-article"></div><div class="cd-timeline-content">'
+                            +'<h4>'+responseData.data[i].title+'</h4><h5>'+responseData.data[i].description+'</h5>'
+                            +'<a href="http://'+window.location.host+'/view?contentId='+responseData.data[i]._id+'" class="cd-read-more" target="_blank">more</a>'
+                            +'<span class="cd-date">'+responseData.data[i].date+'</span></div></div>'+innerHtml;
+                }
+                $('.cd-timeline-article').html(innerHtml);
+                //console.log(responseData.data[0].title);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: '/api/timeline/question',
+            data: '',
+            success: function (responseData) {
+                var innerHtml='';
+                for(var i=0;i<responseData.data.length;i++){
+                    innerHtml='<div class="cd-timeline-block"><div class="cd-timeline-img cd-question"></div><div class="cd-timeline-content">'
+                            +'<h4>'+responseData.data[i].title+'</h4><h5>'+responseData.data[i].content+'</h5>'
+                            +'<a href="http://'+window.location.host+'/question/view?questionId='+responseData.data[i]._id+'" class="cd-read-more" target="_blank">more</a>'
+                            +'<span class="cd-date">'+responseData.data[i].date+'</span></div></div>'+innerHtml;
+                }
+                $('.cd-timeline-question').html(innerHtml);
+                //console.log(responseData.data[0].title);
+            }
+        })
+    })
+</script>

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <title>EMC后台管理</title>
+    <link href="../../public/css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="../../public/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../../public/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../../public/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <script src="../../public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../../public/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/FontAwesome.otf">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.eot">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.svg">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2">
+
+    <script src="../../public/js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../public/css/sweet-alert.css">
+
+    <link rel="stylesheet" href="../../public/css/summernote.css" />
+    <script type="text/javascript" src="../../public/js/summernote.js"></script>
+    <link href="../../public/css/font/summernote.eot">
+    <link href="../../public/css/font/summernote.ttf">
+    <link href="../../public/css/font/summernote.woff">
+
+    <style type="text/css" rel="stylesheet">
+        html,body{
+            font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+            height: 100%;
+            width: 100%;
+            background-color: #f3f3f4;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        .alert-div{
+            text-align: center;
+            z-index: 9999;
+            display: none;
+            position: absolute;
+            width: 30%;
+            display: none;
+        }
+        .sidebar-collapse{
+            background-color: #2F4050;
+            min-width: 160px;
+        }
+        .container-fluid,.row-fluid,.sidebar-collapse{
+            padding: 0;
+            height: 100%;
+        }
+        .nav-list{
+            color: #A6B0C1;
+        }
+        .nav-list li{
+            padding: 5% 10% 5% 10%;
+        }
+        .nav-list li:hover{
+            background-color: #283A49;
+        }
+        .nav-list i{
+            margin-right: 5%;
+        }
+        .nav-list .user-info-list li:last-child{
+            padding-bottom: 0;
+        }
+        .fix-border{
+            border-left: 4px solid #19aa8d;
+        }
+        .nav li a{
+            padding: 0;
+            color: #A6B0C1;
+        }
+        .nav li a:hover{
+            background-color: #283A49;
+        }
+        .breadcrumb{
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid clearfix">
+        <div class="col-md-2 sidebar-collapse">
+            <div class="col-md-12" style="background-color: #283A49;padding: 0;">
+                <blockquote style="margin-bottom: 0;text-align: center;">
+                    <a href="/"><p style="color: white;font-size: 50px;margin: 0 auto;">EMC</p></a>
+                    <small style="color: #7F94A7;">{{userInfo.username}} 的个人中心  <a id="logout" href="javascript:;">注销</a></small>
+                </blockquote>
+            </div>
+            <div class="col-md-12" style="padding: 0;">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="/admin"><i class="icon-home"></i>主页</a>
+                    </li>
+                    <li class="user-info">
+                        <div class="user-info-block"><i class="icon-user"></i>我的信息<i class="icon-angle-left" style="float: right;"></i><i class="icon-angle-down" style="float: right;display: none;"></i></div>
+                        <ul class="user-info-list" style="list-style: none;padding-left: 10%;display: none;">
+                            <li>
+                                <a href="/admin/userInfo">我的信息</a>
+                            </li>
+                            <li>
+                                <a href="/admin/changePassword">修改密码</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% if userInfo.isAdmin or userInfo.isTeacher %}
+                    <li>
+                        <a href="/admin/content"><i class="icon-folder-open"></i>文章管理</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="/admin/question"><i class="icon-question-sign"></i>问答管理</a>
+                    </li>
+                    {% if userInfo.isAdmin or userInfo.isTeacher %}
+                    <li>
+                        <a href="/admin/category"><i class="icon-reorder"></i>分类管理</a>
+                    </li>
+                    {% endif %}
+                    {% if userInfo.isAdmin %}
+                    <li>
+                        <a href="/admin/user"><i class="icon-group"></i>用户管理</a>
+                    </li>
+                    {% endif %}
+                    <li class="else">
+                        <div class="else-block"><i class="icon-cog"></i>其他<i class="icon-angle-left" style="float: right;"></i><i class="icon-angle-down" style="float: right;display: none;"></i></div>
+                        <ul class="else-list" style="list-style: none;padding-left: 10%;display: none;">
+                            {% if userInfo.isAdmin %}
+                            <li>
+                                <a href="/admin/setSlide">设置主页轮播</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 block-main">
+            {% block main %}{% endblock %}
+        </div>
+    </div>
+</div>
+<div class="alert-div">
+    <div class="alert alert-info" role="alert" style="margin: 0 auto;">注销成功,正跳回主页...</div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        window.onresize=function () {
+            fixDocument();
+        };
+        fixDocument();
+        // 注销模块
+        $('#logout').click(function(){
+            $.ajax({
+                type:'get',
+                url:'/api/user/logout',
+                success:function(data){
+                    if(!data.code){
+                        //window.location.reload();
+                        //$('.alert-div').show();
+                        setTimeout("window.location.href='http://'+(window.location.host).toString();",3000);
+                    }
+                }
+            });
+        });
+        $('#logout').click(function() {
+            var alert_div=$('.alert-div');
+            var windowWidth = document.body.clientWidth;
+            var windowHeight = document.body.clientHeight;
+            var popupHeight = alert_div.height();
+            var popupWidth = alert_div.width();
+            alert_div.css({"position": "absolute"})
+                    .css({"left":windowWidth/2-popupWidth/2})
+                    .animate({top: windowHeight/2-popupHeight/2, opacity: "show" }, "slow");
+
+        });
+        $('.user-info-block').click(function () {
+            $('.user-info-list').toggle(500);
+            $('.user-info .icon-angle-left').toggle();
+            $('.user-info .icon-angle-down').toggle();
+            $('.user-info').toggleClass('fix-border');
+        });
+        $('.else-block').click(function () {
+            $('.else-list').toggle(500);
+            $('.else .icon-angle-left').toggle();
+            $('.else .icon-angle-down').toggle();
+            $('.else').toggleClass('fix-border');
+        });
+        function fixDocument(){
+            var documentWidth=$(document).width();
+            //alert(documentWidth);
+            if(documentWidth<=991){
+                $('.sidebar-collapse').removeClass('navbar-fixed-top');
+                $('.block-main').css('margin-left','0');
+            }else{
+                $('.sidebar-collapse').addClass('navbar-fixed-top');
+                $('.block-main').css('margin-left','16.6666%');
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% block main %}
+<style type="text/css" rel="stylesheet">
+    p{
+        margin: 0;
+    }
+    a,a:hover,a:active{
+        text-decoration: none;
+    }
+    .main-content{
+        margin-top: 60px;
+    }
+    .share-box a{
+        display: inline-block;
+        float: right;
+        font-size: 17px;
+        margin-right: 10px;
+        color: #9b9b9b;
+    }
+    .share-box a:first-child{
+        margin-right: 0;
+    }
+    .share-box a:hover{
+        color: black;
+    }
+</style>
+{% for question in data %}
+<div class="col-md-12" style="padding: 10px;border-bottom: 1px #dadada solid;">
+    <div style="font-size: 22px;">{{question.title}}</div>
+    <table>
+        <tr>
+            <th rowspan="2">
+                <img src="../../public/img/avatar.png" style="border-radius: 30px;border: none;width: 50px;height: auto;">
+            </th>
+            <td><p style="font-size: 18px;text-transform: capitalize;margin-left: 10px;">{{question.user.username}}</p></td>
+        </tr>
+        <tr>
+            <td><p style="color: #b0b1b2;margin-left: 10px;">{{question.date}}</p></td>
+        </tr>
+    </table>
+    <div style="font-size: 16px;font-weight: 300;margin-top: 5px;">{% autoescape %}{{question.content}}{% endautoescape %}</div>
+    <div class="row clearfix" style="margin-top: 20px;color: #b9b9b9;">
+        <div class="col-md-9">
+            <a href="/question/view?questionId={{question._id.toString()}}" style="padding: 5px 13px;border: 1px #D3DFE9 solid;border-radius: 2px;background-color: #F1F8FB;color: #4f729e;margin-right: 10px;">More</a>
+            Answers <label style="padding: 0 10px;border: none;border-radius: 2px;background-color: #e5e5e5;color: #8a8a8a;font-size: 12px;">{{question.comments.length}}</label>
+        </div>
+        <div class="col-md-3 share-box">
+            <a href="#">···</a>
+            <a href="#"><i class="icon-share"></i></a>
+            <a href="#"><i class="icon-twitter"></i></a>
+            <a href="#"><i class="icon-facebook-sign"></i></a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div style="clear: both;"></div>
+<ul class="pagination">
+    {% if pages>0 %}
+    <li><a href="/question?page=1">第一页</a></li>
+    {% if page-1!==0 %}
+    <li><a href="/question?page={{page-1}}">上一页</a></li>
+    {%endif%}
+    <li><a href="javascript:;">{{page}}/{{pages}}</a></li>
+    {% if page+1<=pages %}
+    <li><a href="/question?page={{page+1}}">下一页</a></li>
+    {% endif %}
+    <li><a href="/question?page={{pages}}">最后页</a></li>
+    {% else %}
+    <li style="width: 100%;text-align: center;"><a href="#">当前没有任何提问！</a></li>
+    {% endif %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,371 @@
+{% extends 'layout.html' %}
+{% block main %}
+<style type="text/css" rel="stylesheet">
+    a:hover{
+        text-decoration: none;
+    }
+    input,button{
+        outline:none;
+    }
+    p{
+        margin: 0;
+    }
+    ul li{
+        list-style: none;
+    }
+    textarea{
+        outline: none;
+        border: 1px #c7c7c7 solid;
+        width: 100%;
+        height: 150px;
+        resize: none;
+    }
+    textarea:focus{
+        border: 1px black solid;
+    }
+    .main-content{
+        margin-top: 60px;
+    }
+    .view-title{
+        margin-bottom: 20px;
+    }
+    .view-title i{
+        font-size: 16px;
+    }
+    .view-abstract{
+        padding: 10px;
+        background-color: #eaebec;
+    }
+    .view-content{
+        padding: 10px;
+        border: 1px #eaebec solid;
+        margin-bottom: 30px;
+    }
+    .view-share{
+        padding-bottom: 20px;
+        border-bottom: 1px #b8b8b8 solid;
+    }
+    .view-share a{
+        display: inline-block;
+        padding: 3px 30px;
+        margin: 5px;
+        border: 1px #b8b8b8 solid;
+        border-radius: 20px;
+        font-size: 20px;
+        color: #6b6c6d;
+    }
+    .view-share a:hover{
+        border: 1px black solid;
+        color: black;
+    }
+    #commentValue{
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 20px;
+    }
+    #messageComment{
+        width: 160px;
+        background-color: #0083ff;
+        border-radius: 3px;
+        border: none;
+        color: white;
+        font-size: 16px;
+        padding: 8px 0;
+        margin-bottom: 30px;
+    }
+    #messageComment:hover{
+        color: black;
+    }
+    #load-more{
+        background-color: white;
+        border-radius: 5px;
+        border: 1px #CCCCCC solid;
+        color: #6d6d6d;
+        font-size: 16px;
+        padding: 5px 20px;
+    }
+    #load-more:hover{
+        color: black;
+        border: 1px black solid;
+    }
+    .comments-user{
+        font-size: 25px;
+        color: #717171;
+    }
+    .comments-date{
+        font-size: 16px;
+    }
+    .comments-content{
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        padding: 20px 10px;
+        border: 1px #CCCCCC solid;
+        border-radius: 20px;
+    }
+    #emcReward img{
+        width: 250px;
+        height: auto;
+    }
+    .Reward{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .Reward a{
+        padding: 10px 30px;
+        border-radius: 6px;
+        background-color: #ff7471;
+        color: white;
+        font-size: 16px;
+    }
+    .likeNum{
+        font-weight: 400;
+    }
+    .view-title-right{
+        padding: 20px 5px;
+    }
+    .view-title-right i{
+        margin-right: 5px;
+    }
+    .view-title-right a{
+        float: right;
+        display: inline-block;
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+    .view-title-right .view-favorite,.view-favorite2{
+        margin-bottom: 5px;
+        border: none;
+        border-radius: 2px;
+        background-color: #337ab7;
+        color: white;
+    }
+    .view-title-right .view-like{
+        background-color: #ffe2ee;
+        color: #ff5600;
+    }
+</style>
+<div class="row clearfix">
+    <div class="col-md-10">
+        <div class="view-title">
+            <h1>{{content.title}}</h1>
+            <div style="margin-top: 15px;">
+                <i class="icon-user"></i> {{content.user.username}}
+                <i class="icon-bookmark"></i> {{content.category.name}}
+                <i class="icon-calendar"></i> {{content.date.slice(3,20)}}
+                <i class="icon-eye-open"></i> {{content.views}} views
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="view-title-right">
+            {% if userInfo._id %}
+            <a href="javascript:;" class="view-favorite">
+                <i class="icon-star-empty view-star"></i>
+                <p class="favorite" style="display: initial;">Favorite</p>
+            </a>
+            {% else %}
+            <a href="javascript:;" class="view-favorite2">
+                <i class="icon-star-empty view-star"></i>
+                <p class="favorite" style="display: initial;">Favorite</p>
+            </a>
+            {% endif %}
+            <a href="javascript:;" class="view-like">
+                <i class="icon-heart-empty view-heart"></i>
+                <label class="likeNum">{{content.likes}}</label> Likes
+            </a>
+        </div>
+    </div>
+</div>
+<div class="view-abstract">
+    {{content.description}}
+</div>
+<div class="view-content">
+    {% autoescape %}
+    {{content.content}}
+    {% endautoescape %}
+</div>
+<div class="Reward"><a href="javascript:;" data-toggle="modal" data-target="#emcReward">赞赏</a></div>
+<div class="view-share" style="text-align: center;">
+    <h3>Share on</h3>
+    <a><i class="icon-facebook"></i></a>
+    <a><i class="icon-twitter"></i></a>
+    <a><i class="icon-google-plus"></i></a>
+</div>
+<div class="view-comment">
+    <div style="font-size: 35px;text-align: center;margin-top: 20px;font-weight: 200;"><i class="icon-comments"></i> <label id="commentsNum"></label> Comments</div>
+    <div style="margin: 30px 5px;">
+        <ul class="comments"></ul>
+        <div style="text-align: center;">
+            <button id="load-more"></button>
+        </div>
+    </div>
+    <div style="font-size: 35px;text-align: center;padding-top: 20px;font-weight: 200;border-top: 1px #CCCCCC solid;"><i class="icon-pencil"></i> Add Comment</div>
+    <p>
+        <textarea id="commentValue" {% if userInfo._id %}{% else %} disabled="disabled" placeholder="发表评论请先登录..." {% endif %}></textarea>
+    </p>
+    <input type="button" value="Submit" id="messageComment" />
+</div>
+<div class="modal fade" id="emcReward" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false" style="margin-top: 10%">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center">
+                    赞赏一下 {{content.user.username}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="section-rule" style="text-align: center">
+                    <img src="{{content.user.userWeChatPayImg}}">
+                    <img src="{{content.user.userAliPayImg}}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="text" id="contentId" style="display: none" value="{{content._id.toString()}}" />
+<script type="text/javascript" src="../../public/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    $(function(){
+        function coder(str) {
+            var s = "";
+            if (str.length == 0) return "";
+            for (var i = 0; i < str.length; i++) {
+                switch (str.substr(i, 1)) {
+                    case "<": s += "&lt;"; break;
+                    case ">": s += "&gt;"; break;
+                    case "&": s += "&amp;"; break;
+                    case " ": s += "&nbsp;"; break;
+                    case "\"": s += "&quot;"; break;
+                    default: s += str.substr(i, 1); break;
+                }
+            }
+            return s;
+        }
+        //每次文章重载时获取该文章的所有评论
+        $.ajax({
+            type:'GET',
+            url:'/api/comment',
+            data:{
+                contentId:$('#contentId').val(),
+                content:$('#commentValue').val()
+            },
+            success:function(responseData){
+
+                var arr= responseData.data.comments;
+                //渲染评论的必要方法
+                var renderComments=new Comments();
+
+                //获取评论内容
+                $('.comments').html(renderComments.getComment(arr));
+
+                //清空评论框
+                $('#commentValue').val('');
+
+                //展示评论条数
+                $('#commentsNum').html(arr.length);
+
+                //首次加载展示三条，每点击一次加载3条
+                renderComments.resetComment(3);
+                renderComments.loadComments(3);
+
+                // 评论提交
+                $('#messageComment').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'/api/comment/post',
+                        data:{
+                            contentId:$('#contentId').val(),
+                            content:$('#commentValue').val(),
+                        },
+                        success:function(responseData){
+                            alert(responseData.message);
+                            var arr= responseData.data.comments;
+                            $('.comments').html(renderComments.getComment(arr));
+                            $('#commentValue').val('');
+                            $('#commentsNum').html(arr.length);
+
+                            renderComments.resetComment(3);
+                            renderComments.loadComments(3);
+                        }
+                    });
+                    return false;
+                });
+            }
+        });
+    });
+
+    function renderComment(arr){
+        var innerHtml='';
+        for(var i=0;i<arr.length;i++){
+            innerHtml='<li></i><p class="comments-user">'+arr[i].username+' </p><span class="comments-date">'+arr[i].postTime+'</span><p class="comments-content">'+arr[i].content+'</p></li>'+innerHtml;
+        }
+        return innerHtml;
+    }
+
+    // 加载评论的基本逻辑
+    function Comments(){
+        this.count=1;
+        this.comments=0;
+    }
+
+    // 获取评论内容
+    Comments.prototype.getComment=function(arr){
+        var innerHtml='';
+        this.comments=arr.length;//获取评论总数
+        for(var i=0;i<arr.length;i++){
+            innerHtml=
+                    '<li data-index='+(arr.length-i)+'><p class="comments-user">'+
+                    arr[i].username+
+                    ' </p><span class="comments-date">'+
+                    arr[i].postTime+
+                    '</span><p class="comments-content">'+
+                    arr[i].content+
+                    '</p></li>'+innerHtml;
+        }
+
+        return innerHtml;
+    };
+
+    Comments.prototype.resetComment=function (limit){
+        this.count=1;
+        this.comments=$('.comments').children().length;//获取评论总数
+        $('#load-more').unbind("click");
+
+        if(this.comments<limit){
+            $('#load-more').text('没有了...');
+        }else{
+            $('#load-more').text('加载更多');
+        }
+
+        for(var i=1;i<=this.comments;i++){
+            if(i>limit){
+                $('.comments').find('[data-index='+ i.toString()+']').css('display','none');
+            }
+        }
+    };
+
+    Comments.prototype.loadComments=function(limit){
+        var _this=this;
+        $('#load-more').click(function(){
+            //console.log([_this.comments,_this.count]);
+            if((_this.count+1)*limit>=_this.comments){
+                $(this).text('..没有了');
+
+            }
+            _this.count++;
+
+            for(var i=1;i<=_this.comments;i++){
+                if(_this.count<i*_this.count&&i<=(_this.count)*limit){
+                    $('.comments').find('[data-index='+ i.toString()+']').slideDown(300);
+                }
+            }
+        });
+    };
+</script>
+{% endblock %}

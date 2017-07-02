@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+{% block main %}
+<style type="text/css">
+    .management-block {
+        transform: scale(1,1);
+        transition-duration: 0.5s;
+    }
+    .management-block:hover {
+        transform: scale(1.05,1.05);
+        transition-duration: 0.5s;
+    }
+</style>
+<div style="font-size: 30px;margin: 20px 0 10px 0;">
+    EMC后台组件
+</div>
+<ul class="breadcrumb">
+    <li>
+        <a href="/admin">主页</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/admin">后台主页</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        主页
+    </li>
+</ul>
+<div style="border-left: 5px #00B7FF solid;border-radius: 6px;padding:2px 20px 10px 20px;background-color: #ffffff;">
+    <h2>EMC——English Mistakes in China</h2>
+    <h4>Mainly dealing with English mistakes in China and some cultural difference</h4>
+</div>
+<div class="row clearfix" style="margin-top: 20px;">
+    <div class="col-md-12 column">
+        <div class="col-md-3 column">
+            <div class="management-block" style="background-color: #3598dc;height: 100px;border-radius: 6px;text-align: center;vertical-align: middle;padding-top: 13px;">
+                <p style="font-size: 40px;color: white;">0/0/0</p>
+                <div style="background-color: #258fd7;height: 30px;">
+                    <p style="float: right;color: white;margin-right: 10px;font-size: 16px;padding: 4px 0;">
+                        个人信息
+                        <i class="icon-circle-arrow-right"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 column">
+            <div class="management-block" style="background-color: #e7505a;height: 100px;border-radius: 6px;text-align: center;vertical-align: middle;padding-top: 13px;">
+                <p style="font-size: 40px;color: white;">0/0/0</p>
+                <div style="background-color: #e53e49;height: 30px;">
+                    <p style="float: right;color: white;margin-right: 10px;font-size: 16px;">
+                        个人信息
+                        <i class="icon-circle-arrow-right"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 column">
+            <div class="management-block" style="background-color: #32c5d2;height: 100px;border-radius: 6px;text-align: center;vertical-align: middle;padding-top: 13px;">
+                <p style="font-size: 40px;color: white;">0/0/0</p>
+                <div style="background-color: #2bb8c4;height: 30px;">
+                    <p style="float: right;color: white;margin-right: 10px;font-size: 16px;">
+                        个人信息
+                        <i class="icon-circle-arrow-right"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 column">
+            <div class="management-block" style="background-color: #8E44AD;height: 100px;border-radius: 6px;text-align: center;vertical-align: middle;padding-top: 13px;">
+                <p style="font-size: 40px;color: white;">0/0/0</p>
+                <div style="background-color: #823e9e;height: 30px;">
+                    <p style="float: right;color: white;margin-right: 10px;font-size: 16px;">
+                        个人信息
+                        <i class="icon-circle-arrow-right"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

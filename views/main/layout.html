@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EMC</title>
+    <link href="../../public/css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="../../public/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../../public/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../../public/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <script src="../../public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../../public/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/FontAwesome.otf">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.eot">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.svg">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff">
+    <link href="http://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2">
+
+    <script src="../../public/js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../public/css/sweet-alert.css">
+
+    <style type="text/css" rel="stylesheet">
+        html,body{
+            font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+        }
+        body{
+            background-image: url(../../public/img/bgc.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .navbar-login{
+            display: inline-block;
+        }
+        .navbar-login a{
+            padding: 8px 10px;
+            display: inline-block;
+            margin: 5px 0 5px 5px;
+            width: 50px;
+            border: 1px #cccccc solid;
+            border-radius: 10px;
+        }
+        .footer a{
+            display: inline-block;
+        }
+        .footer h1,h2,h3,h4,h5,h6{
+            margin: 0;
+            padding: 0;
+        }
+        .footer img{
+            width: 30px;
+            height: auto;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        @media (max-width: 993px) {
+            .navbar-form{
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+{% block aboutnav %}{% endblock %}
+<div class="container">
+    <div class="row clearfix">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="align-content: center;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><a class="navbar-brand" style="padding: 15px 0px 0px 15px;font-size: 30px;cursor: pointer;">EMC</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <button type="submit" class="btn btn-default"><i class="icon-search icon-large"></i>搜索</button>
+                    </form>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">中国英语错误<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/article?category=5911d729e1e38a38d72e24d0">发音</a>
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d735e1e38a38d72e24d1">语法</a>
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d757e1e38a38d72e24d2">拼写</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d767e1e38a38d72e24d3">易混淆</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">文化<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/article?category=5911d770e1e38a38d72e24d4">节日</a>
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d776e1e38a38d72e24d5">饮食</a>
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d77ee1e38a38d72e24d6">电影</a>
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d784e1e38a38d72e24d7">音乐</a>
+                                </li>
+                                <li>
+                                    <a href="/article?category=5911d788e1e38a38d72e24d8">书籍</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/question">问答</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/about">介绍</a>
+                                </li>
+                                <li>
+                                    <a href="#">联系方式</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="/resources">友情链接</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-right" style="margin-right: 0;">
+                        {% if userInfo._id %}
+                        <div style="display: inline-block;float: left;">
+                            <img src="{{userInfo.userImg}}" style="width: auto;height: 50px;padding: 4px;border: 1px #cccccc solid;border-radius: 3px;">
+                        </div>
+                        {% endif %}
+                        {% if userInfo._id %}
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{userInfo.username}}<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    {% if userInfo.isAdmin or userInfo.isTeacher %}
+                                    <li>
+                                        <a href="../admin">个人中心</a>
+                                    </li>
+                                    {% endif %}
+                                    <li>
+                                        <a href="../admin/question/add">提出问题</a>
+                                    </li>
+                                    <li>
+                                        <a id="logout" href="javascript:;">注销</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% else %}
+                        <div class="navbar-login">
+                            <a class="navbar-login" style="cursor:pointer;" href="/login">登录</a>
+                            <a class="navbar-register" style="cursor:pointer;" href="/login">注册</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block slide %}{% endblock %}
+    </div>
+    <div class="row clearfix main-content" style="background-color: white;padding-top: 15px;border-radius: 3px;">
+        <div class="col-md-9 column">
+            {% block main %}{% endblock %}
+        </div>
+        <div class="col-md-3 column">
+            <link rel="stylesheet" href="../../public/css/timeline.css">
+            {%include 'timeline.html'%}
+        </div>
+    </div>
+    <div class="row clearfix footer" style="background-color:#444;color:#eee;border-radius: 3px;">
+        <div class="col-md-8 column" style="border-right: 1px #CCCCCC solid;padding: 20px;">
+            <h1>EMC</h1>
+            <h4 style="font-weight: 200;">Mainly dealing with English mistakes in China and some cultural difference</h4>
+        </div>
+        <div class="col-md-4 column" style="text-align: center;padding: 10px;">
+            <h2>Connect With Us !</h2>
+            <div>
+                <a><img src="../../public/img/twitter.png" /></a>
+                <a><img src="../../public/img/facebook.png" /></a>
+                <a><img src="../../public/img/wechat.png" /></a>
+                <a><img src="../../public/img/QQ.png" /></a>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column" style="height:40px;padding:10px 0;background-color:#232323;text-align: center;color: #a8a8a8;margin-bottom: 20px;border-radius: 3px;">
+            ©️ 2017 English Mistakes in China
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        // 注销模块
+        $('#logout').click(function(){
+            $.ajax({
+                type:'get',
+                url:'/api/user/logout',
+                success:function(data){
+                    if(!data.code){
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+        $('.navbar-brand').click(function () {
+            window.location.href="http://"+(window.location.host).toString();
+        });
+        $(".dropdown").hover(function(){
+            $(this).addClass("open");
+        },function(){
+            $(this).removeClass("open");
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,19 @@
+{% block main %}
+<ul class="pagination">
+    {% if Number(page)>0 %}
+    <li><a href="/admin/{{type}}?page=1">第一页</a></li>
+    {% endif %}
+    {% if Number(page)-1!==0 %}
+    <li><a href="/admin/{{type}}?page={{Number(page)-1}}">上一页</a></li>
+    {% else %}
+    {% endif %}
+    {% if Number(page)+1<=pages %}
+    <li><a href="/admin/{{type}}?page={{Number(page)+1}}">下一页</a></li>
+    {% if Number(page)>0 %}
+    <li><a href="/admin/{{type}}?page={{Number(pages)}}">最后一页</a></li>
+    {% endif %}
+    {% else %}
+    <li><a>已显示全部</a></li>
+    {% endif %}
+</ul>
+{% endblock %}

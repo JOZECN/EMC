@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<ul class="breadcrumb">
+    <li>
+        <a href="/admin">主页</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/admin/question">问答管理</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        文章列表
+    </li>
+</ul>
+
+<h3 style="margin-top: 0;float: left;">问答管理 <small>（第{{page}}页）</small></h3>
+<a href="question/add"><div style="margin-top: 0;float: right;padding: 8px;border: 1px #cccccc solid;">提出问题</div></a>
+<div style="clear: both;"></div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>标题</th>
+        <th>作者</th>
+        <th>发布时间</th>
+        <th>回答数</th>
+        <th>点赞量</th>
+        <th>是否解决</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for question in data %}
+    <tr class="{% if question.solved %}success{% else %}danger{% endif %}">
+        <td>{{question.title}}</td>
+        <td>{{question.user.username}}</td>
+        <td>{{question.date}}</td>
+        <td>0</td>
+        <td>{{question.likes}}</td>
+        <td>
+            {% if question.solved %}
+            已解决
+            {% else %}
+            未解决
+            {% endif %}
+        </td>
+        <td>
+            <a href="/admin/question/edit?id={{question._id.toString()}}">修改 </a>
+            |<a href="javascript:;" class="deleteBtn" name="{{question._id.toString()}}"> 删除</a>
+            {% if question.solved %}{% else %}|<a href="javascript:;" class="solvedBtn" name="{{question._id.toString()}}"> 已解决</a>{% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="table-info">一共有{{count}}个问题，每页显示{{limit}}个。</p>
+<script type="text/javascript">
+    $(function() {
+        $('.deleteBtn').click(function (e) {
+            var id=$(e.target).attr('name');
+            sweetAlert({
+                title: '确认删除当前问题? ',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#0083ff",
+                confirmButtonText: "确认!",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/question/delete',
+                    data: {
+                        id:id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if(data.code==1) {
+                            sweetAlert({
+                                title: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: "#0083ff",
+                                confirmButtonText: "返回问答管理",
+                                closeOnConfirm: false
+                            }, function () {
+                                history.go(0);
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        $('.solvedBtn').click(function (e) {
+            var id=$(e.target).attr('name');
+            sweetAlert({
+                title: '确认当前问题已解决? ',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#0083ff",
+                confirmButtonText: "确认!",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/question/solved',
+                    data: {
+                        id:id
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if(data.code==1) {
+                            sweetAlert({
+                                title: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: "#0083ff",
+                                confirmButtonText: "返回问答管理",
+                                closeOnConfirm: false
+                            }, function () {
+                                history.go(0);
+                            });
+                        }
+                    }
+                });
+            });
+        })
+    })
+</script>
+{%include 'page.html'%}
+
+{% endblock %}

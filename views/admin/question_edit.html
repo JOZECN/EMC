@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+{% block main %}
+<style type="text/css" rel="stylesheet">
+    p{
+        margin: 10px 0;
+    }
+    .PostContent{
+        width: 160px;
+        background-color: #0083ff;
+        border-radius: 3px;
+        border: none;
+        color: white;
+        font-size: 16px;
+        padding: 8px 0;
+        margin-bottom: 30px;
+    }
+</style>
+<ul class="breadcrumb">
+    <li>
+        <a href="/admin">主页</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/admin/question">问答管理</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        修改问题
+    </li>
+</ul>
+
+<h3>问答管理    <small>>修改问题</small></h3>
+<div method="post" style="width: 100%;height: 100%;margin-bottom: 30px;">
+    <div class="row-fluid clearfix">
+        <div class="col-md-12" style="padding: 0;">
+            <div style="padding: 20px;border: 1px #CCCCCC solid;background-color: white;">
+                <input type="text" id="title" name="title" value="{{data.title}}" placeholder="请输入问题" style="width: 100%;height: auto;font-size: 25px;border: none;border-bottom: 1px #cbcbcb solid;"/>
+                <div id="content">{% autoescape %}{{data.content}}{% endautoescape %}</div>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#content').summernote({
+                            height:1000,
+                            minheight:1000,
+                            dialogsFade:true,
+                            toolbar: [
+                                // [groupName, [list of button]]
+                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                ['font', ['strikethrough', 'superscript', 'subscript']],
+                                ['fontsize', ['fontsize']],
+                                ['color', ['color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['height', ['height']]
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+            <button class="PostContent">提交</button>
+            <script type="text/javascript">
+                $(function() {
+                    $('.PostContent').click(function () {
+                        $.ajax({
+                            type: 'post',
+                            url: '/admin/question/edit',
+                            data: {
+                                id:'{{data.id}}',
+                                title: $.trim($('#title').val()),
+                                content: $('#content').summernote('code'),
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                var type='success';
+                                var showCancelButton=false;
+                                if(data.code==1||data.code==2){
+                                    type='warning';
+                                    showCancelButton=true;
+                                }
+                                //alert(data.message);
+                                sweetAlert({
+                                    title: data.message,
+                                    type: type,
+                                    showCancelButton: showCancelButton,
+                                    confirmButtonColor: "#0083ff",
+                                    confirmButtonText: "返回问答管理",
+                                    closeOnConfirm: false
+                                }, function(){
+                                    window.location.href='http://'+(window.location.host).toString()+"/admin/question";
+                                });
+                            }
+                        });
+                    });
+                })
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

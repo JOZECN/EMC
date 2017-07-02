@@ -1,0 +1,226 @@
+{% extends 'layout.html' %}
+{% block main %}
+<style rel="stylesheet" type="text/css">
+    .reviseInfo,.reviseInfo-save{
+        width: 120px;
+        font-size: 16px;
+        background-color: #0083ff;
+        border-radius: 3px;
+        border: none;
+        color: white;
+        padding: 5px;
+    }
+    .userImg img {
+        height: 100px;
+        width: auto;
+        padding: 5px;
+        border: 1px #cccccc solid;
+        border-radius: 3px;
+        margin-bottom: 10px;
+    }
+    .opacity:hover{
+        opacity: 0.5;
+    }
+    .userRewardImg {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .userRewardImg table {
+        margin: 0 auto;
+    }
+    .userRewardImg img {
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        padding: 5px;
+        border: 1px #cccccc solid;
+        border-radius: 3px;
+    }
+</style>
+<ul class="breadcrumb">
+    <li>
+        <a href="/admin">主页</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/admin/userInfo">我的信息</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        我的信息
+    </li>
+</ul>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{user.username}} 的个人信息面板
+        </h3>
+    </div>
+    <div class="panel-body" style="text-align: center">
+        <div style="width: 40%;margin: 0 auto;padding-top: 20px;">
+            <div class="userImg">
+                <label>
+                    <img src="{{user.userImg}}">
+                    <input type="file" name="imgFile" multiple="multiple" accept="image/*" style="display: none;">
+                </label>
+            </div>
+            <div class="bs-example bs-example-form">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-certificate"></i> 用户ID&nbsp;&nbsp;&nbsp; </span>
+                    <input type="text" class="form-control" value="{{user._id.toString()}}" disabled="disabled">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-user"></i> 用户名称</span>
+                    <input type="text" class="form-control username" value="{{user.username}}" disabled="disabled">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-group"></i>用户身份</span>
+                    <input type="text" class="form-control" value="{% if user.isTeacher %}{% if user.isAdmin %}管理员{% else %}教师{% endif %}{% else %}学生{% endif %}" disabled="disabled">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-envelope-alt"></i>用户邮箱</span>
+                    <input type="text" class="form-control userEmail" value="{{user.userEmail}}" disabled="disabled">
+                </div>
+                {% if userInfo.isAdmin or userInfo.isTeacher %}
+                <div class="userRewardImg">
+                    <table style="text-align: center;">
+                        <tr>
+                            <td>
+                                <label>
+                                    <img src="{{user.userWeChatPayImg}}">
+                                    <input type="file" name="userWeChatPayImgFile" multiple="multiple" accept="image/*" style="display: none;">
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <img src="{{user.userAliPayImg}}">
+                                    <input type="file" name="userAliPayImgFile" multiple="multiple" accept="image/*" style="display: none;">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>微信二维码</td>
+                            <td>支付宝二维码</td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+                <div  style="margin: 0 auto;margin-top: 20px;">
+                    <input type="button" value="点击修改" class="reviseInfo">
+                    <input type="button" value="保存修改" class="reviseInfo-save" style="display: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var userData={
+            userImg: '../public/img/user/avatar.png',
+            userAliPayImg: '../public/img/reward/alipayReward.png',
+            userWeChatPayImg: '../public/img/reward/wechatReward.png'
+        };
+        $('.reviseInfo').click(function () {
+            $('.reviseInfo').hide();
+            $('.reviseInfo-save').show();
+            $('.reviseImg').show();
+            $('.username').attr('disabled',false);
+            $('.userEmail').attr('disabled',false);
+            $('.userImg img').addClass('opacity');
+        });
+        $("input[name='imgFile']").change(function () {
+            var file=this.files||this.value;
+            //console.log(file);
+            var formData = new FormData();
+            formData.append("file", file[0]);
+            $.ajax({
+                url: '/admin/uploadUserImg',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    userData.userImg=data.url;
+                    $('.userImg img').attr("src",data.url);
+                }
+            });
+        });
+        $("input[name='userWeChatPayImgFile']").change(function () {
+            var file=this.files||this.value;
+            //console.log(file);
+            var formData = new FormData();
+            formData.append("file", file[0]);
+            $.ajax({
+                url: '/admin/uploadUserImg',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    userData.userWeChatPayImg=data.url;
+                    $('.userRewardImg img:first').attr("src",data.url);
+                }
+            });
+        });
+        $("input[name='userAliPayImgFile']").change(function () {
+            var file=this.files||this.value;
+            //console.log(file);
+            var formData = new FormData();
+            formData.append("file", file[0]);
+            $.ajax({
+                url: '/admin/uploadUserImg',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    userData.userAliPayImg=data.url;
+                    $('.userRewardImg img:last').attr("src",data.url);
+                }
+            });
+        });
+        $('.reviseInfo-save').click(function () {
+            $.ajax({
+                type: 'post',
+                url: '/admin/userInfo/edit',
+                data: {
+                    username: $.trim($('.username').val()),
+                    userEmail: $.trim($('.userEmail').val()),
+                    userImg: userData.userImg,
+                    userAliPayImg: userData.userAliPayImg,
+                    userWeChatPayImg: userData.userWeChatPayImg
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var type='success';
+                    var showCancelButton=false;
+                    if(data.code==1){
+                        type='warning';
+                        showCancelButton=true;
+                    }
+                    sweetAlert({
+                        title: data.message,
+                        type: type,
+                        showCancelButton: showCancelButton,
+                        confirmButtonColor: "#0083ff",
+                        confirmButtonText: "返回我的信息",
+                        closeOnConfirm: false
+                    }, function(){
+                        window.location.href='http://'+(window.location.host).toString()+"/admin/userInfo";
+                    });
+                }
+            });
+            $('.reviseInfo').show();
+            $('.reviseInfo-save').hide();
+            $('.reviseImg').hide();
+            $('.username').attr('disabled',true);
+            $('.userEmail').attr('disabled',true);
+            $('.userImg img').removeClass('opacity');
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends 'layout.html' %}
+{% block main %}
+<style rel="stylesheet" type="text/css">
+    html,body{
+        height: 100%;
+        width: 100%;
+    }
+    p{
+        margin: 0;
+    }
+    a,a:hover,a:active{
+        text-decoration: none;
+    }
+    .main-content{
+        margin-top: 60px;
+    }
+    .resources .row .col-md-4,.col-md-6{
+        margin-bottom: 20px;
+    }
+    .resources .resources-show{
+        height: 100px;
+        border: 1px #CCCCCC solid;
+        border-radius: 10px;
+        box-shadow:0 2px 2px #cccccc;
+        padding: 15px 10px;
+    }
+    .resources .resources-show img{
+        width: 60px;
+        height: auto;
+        border-radius: 60px;
+        margin-right: 10px;
+        transform: scale(1,1);
+        transition: transform 0.3s;
+    }
+    .resources .resources-show h4{
+        color: #63676a;
+    }
+    .resources .resources-show p{
+        font-size: 10px;
+        color: #a1a5a8;
+    }
+    .resources .resources-show:hover{
+        box-shadow:0 4px 4px #b2b2b2;
+    }
+    .resources .resources-show:hover img{
+        transform: scale(1.2,1.2);
+        transition: transform 0.3s;
+    }
+</style>
+<div class="container-fluid resources">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="text-align: center;padding: 5px;margin-bottom: 10px;border: 1px #cccccc solid;border-radius: 10px;box-shadow:0 2px 2px #cccccc;">
+                <h3>Resources</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="resources-show">
+                <a href="http://rachelsenglish.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/rachelsenglish.jpg"></th>
+                            <td><h4>rachelsenglish</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>专门致力于美式英语的基础发音，包含了很多美式发音技巧</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="resources-show">
+                <a href="https://www.merriam-webster.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/merriam-webster.jpg"></th>
+                            <td><h4>merriam-webster</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>非常好的一个英英在线词典</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="https://www.collinsdictionary.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/collinsdictionary.jpg"></th>
+                            <td><h4>collinsdictionary</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>有很多释义和解释的一本英文在线词典，英式美式的都有</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="https://www.ted.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/ted.jpg"></th>
+                            <td><h4>TED</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>这个大家都很熟悉的</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="http://langeasy.com.cn/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/langeasy.jpg"></th>
+                            <td><h4>朗易思听</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>内含非常多丰富的视听资源，并且几乎都有中英对照</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="https://www.eslpod.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/eslpod.jpg"></th>
+                            <td><h4>ESLpodcast</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>专门为英语是第二母语的人准备的网站，非常实用</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="http://www.readingbear.org/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/readingbear.jpg"></th>
+                            <td><h4>readingbear</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>很适合小孩子和想要从头纠正自己发音的英语学习者</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="https://en.wikipedia.org/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/wikipedia.jpg"></th>
+                            <td><h4>维基百科</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>比较靠谱和详实的英文百科全书</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="https://www.scientificamerican.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/scientificamerican.jpg"></th>
+                            <td><h4>美国科学人</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>在学习英语的同时还可以学到很多科学知识</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="http://www.am774.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/am774.jpg"></th>
+                            <td><h4>北京外语广播</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>很多好的老师和英语学习内容</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="resources-show">
+                <a href="http://www.51voa.com/">
+                    <table>
+                        <tr>
+                            <th rowspan="2"><img src="../../public/img/51voa.jpg"></th>
+                            <td><h4>美国之音</h4></td>
+                        </tr>
+                        <tr>
+                            <td><p>喜欢美国各方面的英语爱好者的福音噢</p></td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

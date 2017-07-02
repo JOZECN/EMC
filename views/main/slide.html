@@ -1,0 +1,43 @@
+<style type="text/css">
+    .slide a,.slide a:hover,.slide a:active{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="carousel slide" id="carousel-725844" style="margin-top: 60px;padding-top: 10px;padding-bottom: 10px;background-color: white;border-radius: 3px;">
+    <ol class="carousel-indicators">
+        {% for slide in slideData %}
+        <li data-slide-to="{{Number(slide.slideRank)-1}}">
+        </li>
+        {% endfor %}
+    </ol>
+    <div class="carousel-inner" style="width: 100%;">
+        {% for slide in slideData %}
+        <div class="item">
+            <a href="/view?contentId={{slide._id.toString()}}">
+                <img alt="" src="{{slide.slideImg}}" style="width: 100%;"/>
+            </a>
+            <div class="carousel-caption">
+                <h4>
+                    <a href="/view?contentId={{slide._id.toString()}}">{{slide.title}}</a>
+                </h4>
+                <p>
+                    {{slide.description}}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a class="left carousel-control" href="#carousel-725844" data-slide="prev" style="border-radius: 3px;">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-725844" data-slide="next" style="border-radius: 3px;">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.item:first').addClass('active');
+        $('.carousel-indicators li:first').addClass('active');
+    })
+</script>

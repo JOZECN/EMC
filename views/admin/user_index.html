@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<ul class="breadcrumb">
+    <li>
+        <a href="/admin">主页</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/admin/user">用户管理</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        用户列表
+    </li>
+</ul>
+
+<h3>用户列表    <small>（第{{page}}页）</small></h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>用户名</th>
+        <th>是否教师</th>
+        <th>是否管理员</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in data %}
+    <tr class="success">
+        <td>{{user._id.toString()}}</td>
+        <td>{{user.username}}</td>
+        <td>
+            {% if user.isTeacher %}
+            是
+            {% else %}
+            不是
+            {% endif %}
+        </td>
+        <td>
+            {% if user.isAdmin %}
+            是
+            {% else %}
+            不是
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="table-info">一共有{{count}}个用户，每页显示{{limit}}个。</p>
+
+{%include 'page.html'%}
+
+{% endblock %}

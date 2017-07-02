@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block slide %}
+{%include 'slide.html'%}
+{% endblock %}
+
+{% block main %}
+<style type="text/css" rel="stylesheet">
+    p{
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+{% for content in data %}
+<div class="col-md-4">
+    <div class="thumbnail">
+        <div style="width: 100%;height: 150px;overflow: hidden;">
+            <img alt="300x200" src="{{content.featuredImg}}" style="width: 100%;height: 100%;" />
+        </div>
+        <div class="caption">
+            <h4 style="height: 40px;overflow: hidden">
+                <a href="/view?contentId={{content._id.toString()}}">{{content.title}}</a>
+            </h4>
+            <p><i class="icon-user"></i> {{content.user.username}}</p>
+            <p><i class="icon-calendar"></i> {{content.date.slice(3,11)}}</p>
+            <p><i class="icon-bookmark"></i> {{content.category.name}}</p>
+            <p><i class="icon-eye-open"></i> {{content.views}}</p>
+            <p style="height: 38px;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;text-overflow: ellipsis;">文章摘要:{{content.description}}</p>
+            <address>推送于{{content.date}}</address>
+            <p>
+                <a class="btn btn-primary" href="/view?contentId={{content._id.toString()}}" style="border: none;background-color: #B9B9B9;">more</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div style="clear: both;"></div>
+<ul class="pagination">
+    {% if pages>0 %}
+    <li><a href="/article?category={{category.toString()}}&page=1">第一页</a></li>
+    {% if page-1!==0 %}
+    <li><a href="/article?category={{category.toString()}}&page={{page-1}}">上一页</a></li>
+    {%endif%}
+    <li><a href="javascript:;">{{page}}/{{pages}}</a></li>
+    {% if page+1<=pages %}
+    <li><a href="/article?category={{category.toString()}}&page={{page+1}}">下一页</a></li>
+    {% endif %}
+    <li><a href="/article?category={{category.toString()}}&page={{pages}}">最后页</a></li>
+    {% else %}
+    <li style="width: 100%;text-align: center;"><a href="#">当前分类没有任何文章！</a></li>
+    {% endif %}
+</ul>
+
+{% endblock %}

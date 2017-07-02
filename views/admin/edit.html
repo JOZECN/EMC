@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block main %}
+<h3>分类管理    <small>>编辑分类</small></h3>
+
+<form method="post">
+    <span>分类名</span><br/>
+    <input type="text" value="{{category.name}}" name="name"/>
+    <button type="submit">提交</button>
+</form>
+{% endblock %}

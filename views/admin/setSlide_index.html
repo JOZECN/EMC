@@ -1,0 +1,282 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+<style rel="stylesheet" type="text/css">
+    .table-hover tbody tr:hover{
+        background-color: #ebebeb;
+    }
+    .table-hover tbody{
+        border-bottom: 1px #dcdcdc solid;
+    }
+    .slideImg{
+        background-color: #f9f9f9;
+    }
+    .slideImg img{
+        width: 210px;
+        height: 70px;
+        border: 1px #CCCCCC solid;
+        padding: 3px;
+        cursor:pointer;
+    }
+    .slideImg img:hover{
+        border: 1px #a8a8a8 solid;
+    }
+    .slideArticleId,.slideArticleTitle{
+        width: 200px;
+        height: auto;
+        padding: 2px 5px;
+        border: 1px #cccccc solid;
+        color: #a1a1a1;
+        font-weight: 400;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
+    .selectSlideArticle,.setSlideComplete{
+        border: none;
+        background-color: #009dff;
+        border-radius: 2px;
+        color: white;
+        padding: 3px 20px;
+        outline: none;
+    }
+    .articleList .table tbody tr{
+        border: 1px #CCCCCC solid;
+    }
+    .articleList .table tbody tr:hover{
+        background-color: white;
+        border: 2px #00c18a solid;
+        cursor: pointer;
+    }
+    .table>thead>tr>th{
+        border-bottom: none;
+    }
+</style>
+
+<ul class="breadcrumb">
+    <li>
+        <a href="/admin">主页</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/admin/setSlide">设置主页轮播</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        设置主页轮播
+    </li>
+</ul>
+<div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th style="width: 10%">轮播排序</th>
+            <th style="width: 25%">轮播图片 <p style="display: inline-block;color: #a1a1a1;padding: 0;margin: 0;">(长宽比例:3比1)</p></th>
+            <th>选择文章</th>
+            <th>完成设置</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="1">
+            <th scope="row">1</th>
+            <td>
+                <label class="slideImg">
+                    <img src="../../public/img/slide/default.png">
+                    <input type="file" name="imgFile" multiple="multiple" accept="image/*" style="display: none;">
+                </label>
+            </td>
+            <td>
+                文章: <input class="slideArticleId" data-slide="slide1" placeholder="请选择文章..." disabled="disabled">
+                <button class="selectSlideArticle">选择文章</button><br>
+                标题: <input class="slideArticleTitle" placeholder="请选择文章..." disabled="disabled">
+            </td>
+            <td>
+                <button class="setSlideComplete">设置该文章</button>
+            </td>
+        </tr>
+        <tr class="2">
+            <th scope="row">2</th>
+            <td>
+                <label class="slideImg">
+                    <img src="../../public/img/slide/default.png">
+                    <input type="file" name="imgFile" multiple="multiple" accept="image/*" style="display: none;">
+                </label>
+            </td>
+            <td>
+                文章: <input class="slideArticleId" data-slide="slide1" placeholder="请选择文章..." disabled="disabled">
+                <button class="selectSlideArticle">选择文章</button><br>
+                标题: <input class="slideArticleTitle" placeholder="请选择文章..." disabled="disabled">
+            </td>
+            <td>
+                <button class="setSlideComplete">设置该文章</button>
+            </td>
+        </tr>
+        <tr class="3">
+            <th scope="row">3</th>
+            <td>
+                <label class="slideImg">
+                    <img src="../../public/img/slide/default.png">
+                    <input type="file" name="imgFile" multiple="multiple" accept="image/*" style="display: none;">
+                </label>
+            </td>
+            <td>
+                文章: <input class="slideArticleId" data-slide="slide1" placeholder="请选择文章..." disabled="disabled">
+                <button class="selectSlideArticle">选择文章</button><br>
+                标题: <input class="slideArticleTitle" placeholder="请选择文章..." disabled="disabled">
+            </td>
+            <td>
+                <button class="setSlideComplete">设置该文章</button>
+            </td>
+        </tr>
+        <tr class="4">
+            <th scope="row">4</th>
+            <td>
+                <label class="slideImg">
+                    <img src="../../public/img/slide/default.png">
+                    <input type="file" name="imgFile" multiple="multiple" accept="image/*" style="display: none;">
+                </label>
+            </td>
+            <td>
+                文章: <input class="slideArticleId" data-slide="slide1" placeholder="请选择文章..." disabled="disabled">
+                <button class="selectSlideArticle">选择文章</button><br>
+                标题: <input class="slideArticleTitle" placeholder="请选择文章..." disabled="disabled">
+            </td>
+            <td>
+                <button class="setSlideComplete">设置该文章</button>
+            </td>
+        </tr>
+        <tr class="5">
+            <th scope="row">5</th>
+            <td>
+                <label class="slideImg">
+                    <img src="../../public/img/slide/default.png">
+                    <input type="file" name="imgFile" multiple="multiple" accept="image/*" style="display: none;">
+                </label>
+            </td>
+            <td>
+                文章: <input class="slideArticleId" data-slide="slide1" placeholder="请选择文章..." disabled="disabled">
+                <button class="selectSlideArticle">选择文章</button><br>
+                标题: <input class="slideArticleTitle" placeholder="请选择文章..." disabled="disabled">
+            </td>
+            <td>
+                <button class="setSlideComplete">设置该文章</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="articleList" style="position: absolute;min-width: 600px;max-width: 1000px;height: auto;max-height: 800px;display: none;z-index: 999;background-color: white">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>标题</th>
+            <th>作者</th>
+            <th>所属分类</th>
+            <th>发布时间</th>
+            <th>阅读量</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for content in data %}
+
+        <tr>
+            <td>{{content.title}}</td>
+            <td>{{content.user.username}}</td>
+            <td>{{content.category.name}}</td>
+            <td>{{content.date}}</td>
+            <td>{{content.views}}</td>
+            <td><input class="contentTitle" value="{{content.title}}" style="display: none"></td>
+            <td><input class="contentId" value="{{content._id.toString()}}" style="display: none"></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var selectContentDate={
+            rank:'',
+            contentId:'',
+            contentTitle:'',
+            slideImgUrl:''
+        };
+
+        loadSlideSetting();
+        function loadSlideSetting() {
+            $.ajax({
+                url: '/admin/setSlide/loadSlideSetting',
+                type: 'POST',
+                success: function (data) {
+                    var slideSettingLength=data.loadSlideSetting.length;
+                    if(slideSettingLength != 0){
+                        for(var i=0;i<slideSettingLength;i++){
+                            $('tr[class='+(i+1)+'] .slideImg img').attr("src",data.loadSlideSetting[i].slideImg);
+                            $('tr[class='+(i+1)+'] .slideArticleId').attr("value",data.loadSlideSetting[i]._id);
+                            $('tr[class='+(i+1)+'] .slideArticleTitle').attr("value",data.loadSlideSetting[i].title);
+                            //console.log(data.loadSlideSetting[i]._id);
+                        }
+                    }
+                }
+            });
+        }
+
+        $('.selectSlideArticle').click(function () {
+            selectContentDate.rank=$(this).parents("tr").attr('class');
+            load_article_list();
+        });
+        function load_article_list() {
+            var articleList=$('.articleList');
+            var windowWidth = document.body.clientWidth;
+            var windowHeight = document.body.clientHeight;
+            var popupHeight = articleList.height();
+            var popupWidth = articleList.width();
+            articleList.css({"left":windowWidth/2-popupWidth/2-200})
+                    .animate({top: windowHeight/2-popupHeight/2-200, opacity: "show" }, "slow");
+        }
+
+        $('.articleList tbody tr').click(function () {
+            selectContentDate.contentTitle=$(this).find("input.contentTitle").val();
+            selectContentDate.contentId=$(this).find("input.contentId").val();
+            $('tr[class='+selectContentDate.rank+'] .slideArticleId').attr("value",selectContentDate.contentId);
+            $('tr[class='+selectContentDate.rank+'] .slideArticleTitle').attr("value",selectContentDate.contentTitle);
+            $('.articleList').hide(600);
+        });
+
+        $("input[name='imgFile']").change(function () {
+            var num=$(this).parents("tr").attr('class');
+            var file=this.files||this.value;
+            //console.log(file);
+            var formData = new FormData();
+            formData.append("file", file[0]);
+            $.ajax({
+                url: '/admin/uploadImg',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    //alert(data.url);
+                    selectContentDate.slideImgUrl=data.url;
+                    $('tr[class='+num+'] .slideImg img').attr("src",data.url);
+                }
+            });
+        });
+
+        $('.setSlideComplete').click(function () {
+            if(selectContentDate.contentId==''||selectContentDate.slideImgUrl==''){
+                alert('未设置图片或文章');
+            }else {
+                $.ajax({
+                    url: '/admin/setSlide/setSlideComplete',
+                    data: selectContentDate,
+                    type: 'POST',
+                    success: function (data) {
+                        if(data.code==1){
+                            alert(data.message);
+                        }
+                    }
+                })
+            }
+        })
+    })
+</script>
+{% endblock %}
