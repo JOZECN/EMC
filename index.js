@@ -30,8 +30,6 @@ var User=require('./models/User');
 // 设置静态文件托管
 app.use('/public',express.static(__dirname+'/public'));
 
-app.use(bodyParser.urlencoded({extended:true}));
-
 // 定义模板引擎，使用swig.renderFile方法解析后缀为html的文件
 var swig=require('swig');
 app.engine('html',swig.renderFile);
@@ -43,8 +41,6 @@ app.set('view engine','html');
 //发布时要删除这一段
 swig.setDefaults({cache:false});
 
-// bodyParser设置
-app.use(bodyParser.urlencoded({extended:true}));
 
 //app.get('/',function (req,res,next) {
     /*
